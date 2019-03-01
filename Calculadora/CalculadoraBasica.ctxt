@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=CalculadoraBasica
+comment0.text=\r\n\ Calculadora\ que\ implementa\ as\ 5\ opera\u00E7oes\ basicas\ (+,\ -,\ *,\ /,\ %).\r\n\ \r\n\ @author\ Prof.\ Julio\ Arakaki\ \r\n\ @version\ 1.0\ (20190301)\r\n
+comment1.params=a\ b
+comment1.target=double\ adicao(double,\ double)
+comment1.text=\ Os\ atributos\ s\u00E3o\ necess\u00E1rios\ numa\ calculadora???\r\n\ private\ double\ operando1;\r\n\ private\ char\ operador;\r\n\ private\ double\ operando2;\r\n
+comment2.params=a\ b
+comment2.target=double\ subtracao(double,\ double)
+comment3.params=a\ b
+comment3.target=double\ multiplicacao(double,\ double)
+comment4.params=a\ b
+comment4.target=double\ divisao(double,\ double)
+comment5.params=a\ b
+comment5.target=double\ resto(double,\ double)
+comment6.params=a\ op\ b
+comment6.target=double\ calcular(double,\ java.lang.String,\ double)
+numComments=7
