@@ -1,8 +1,8 @@
-#Calculadora Avançada
+# Calculadora Avançada
 
-###Título
+### Título
 * Calculadora avançada
-###Objetivo
+### Objetivo
 * Criar uma calculadora para funções básicas e algumas avançadas
-###Data
+### Data
 * 01/03/2019
