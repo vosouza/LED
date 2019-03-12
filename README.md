@@ -1,2 +1,2 @@
 # LED
-* Projetos da matéria de LED
+* Projetos da matéria de Laboratório de Estruturas Dinâmicas
