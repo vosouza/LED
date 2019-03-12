@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=QuadraticEquation
+comment1.params=a\ b\ c
+comment1.target=QuadraticEquation(double,\ double,\ double)
+comment2.params=
+comment2.target=double\ calculateSolution1()
+comment3.params=
+comment3.target=double\ calculateSolution2()
+comment4.params=
+comment4.target=boolean\ hasSolution()
+comment5.params=
+comment5.target=void\ calculateDelta()
+numComments=6
