@@ -1,4 +1,4 @@
-# Equações Quadráticas
+# Texto nome - Herança
 
 ### Título
 * Texto_Nome
