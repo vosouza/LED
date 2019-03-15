@@ -1,12 +1,10 @@
-----------------------------------------------------------------------------
-Este é o arquivo README do projeto. Você deve descrever aqui o seu projeto.
-Informe ao usuário (alguém que não sabe nada sobre este projeto!) tudo que
-ele/ela precisa saber. Os comentários devem incluir, pelo menos:
-------------------------------------------------------------------------
+# GUI para cadastro de alunos
 
-TITULO DO PROJETO:
-OBJETIVO DO PROJETO:
-VERSÃO ou DATA:
-COMO INICIAR O PROJETO:
-AUTORES:
-INSTRUÇÕES PARA O USUÁRIO:
+### Título
+* Cadastro
+### Objetivo
+* Criar uma classe para inserir, remover, listar alunos usando a classe textoNome como base.
+### Data
+* 15/03/2019
+### Entrega
+* 19/03/2019
