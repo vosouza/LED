@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=IEntrada
+comment0.text=\r\n\ Escreva\ a\ descri\u00E7\u00E3o\ da\ interface\ IEntrada\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (n\u00FAmero\ da\ vers\u00E3o\ ou\ data)\r\n
+comment1.params=
+comment1.target=double\ lerParametroA()
+comment2.params=
+comment2.target=double\ lerParametroB()
+comment3.params=
+comment3.target=double\ lerParametroC()
+numComments=4
