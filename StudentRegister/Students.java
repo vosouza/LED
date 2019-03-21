@@ -37,8 +37,8 @@ public class Students implements Serializable {
     public Students(String studentName, String studentID, 
 			Date registrationDate, String phoneNumber, 
 			String currentCity, String currentState, 
-			String currentZipCode) {
-
+			String currentZipCode) 
+    {
         this.studentName 		= studentName;
 		this.studentID 			= studentID;
 		this.registrationDate 	= registrationDate;
@@ -46,34 +46,39 @@ public class Students implements Serializable {
 		this.phoneNumber 		= phoneNumber;
 		this.currentCity 		= currentCity;
 		this.currentState 		= currentState;
-		this.currentZipCode 	= currentZipCode;
-                
+		this.currentZipCode 	= currentZipCode;             
     }
 
-	public Courses getCourse() {
+	public Courses getCourse() 
+    {
 		return course1;
 	}
 
-	public void setCourse(Courses course) {
+	public void setCourse(Courses course) 
+    {
 		this.course1 = course;
 	}
 
-	public String getCurrentCity() {
+	public String getCurrentCity() 
+    {
 		return currentCity;
 	}
 
-	public void setCurrentCity(String currentCity) {
+	public void setCurrentCity(String currentCity) 
+    {
 		if (currentCity.equals(""))
 			this.currentCity = "N/A";
 		else
 			this.currentCity = currentCity;
 	}
 
-	public String getCurrentState() {
+	public String getCurrentState() 
+    {
 		return currentState;
 	}
 
-	public void setCurrentState(String currentState) {
+	public void setCurrentState(String currentState) 
+    {
 		if (currentState.equals(""))
 			this.currentState = "N/A";
 		else
@@ -84,59 +89,70 @@ public class Students implements Serializable {
 		return currentZipCode;
 	}
 
-	public void setCurrentZipCode(String currentZipCode) {
+	public void setCurrentZipCode(String currentZipCode) 
+    {
 		if (currentZipCode.equals(""))
 			this.currentZipCode = "N/A";
 		else
 			this.currentZipCode = currentZipCode;
 	}
 
-	public String getPhoneNumber() {
+	public String getPhoneNumber() 
+    {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) 
+    {
 		if (phoneNumber.equals(""))
 			this.phoneNumber = "N/A";
 		else
 			this.phoneNumber = phoneNumber;
 	}
 
-	public Date getRegistrationDate(){
+	public Date getRegistrationDate()
+    {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(Date registrationDate) 
+    {
 		this.registrationDate = registrationDate;
 	}
 
-	public String getStudentID() {
+	public String getStudentID() 
+    {
 		return studentID;
 	}
 
-	public void setStudentID(String id) {
+	public void setStudentID(String id) 
+    {
 		if (id.equals(""))
 			this.studentID = "N/A";
 		else
 			this.studentID = id;
 	}
 
-	public String getStudentName() {
+	public String getStudentName() 
+    {
 		return studentName;
 	}
 
-	public void setStudentName(String name) {
+	public void setStudentName(String name) 
+    {
 		if (name.equals(""))
 			this.studentName = "N/A";
 		else
 			this.studentName = name;
 	}
 
-    public static void setCompareAttribute(int attribute) {
+    public static void setCompareAttribute(int attribute) 
+    {
         compareAttribute = attribute;
     }
 
-    public int compareTo(Students student, int attribute ) {
+    public int compareTo(Students student, int attribute )
+    {
         if ( attribute == ID ) {
             return (this.studentID.compareTo(student.getStudentID()));
         } else {
@@ -144,29 +160,35 @@ public class Students implements Serializable {
         }
     }
 
-    public int compareTo(Students student) {
+    public int compareTo(Students student) 
+    {
         return compareTo(student, compareAttribute);
     }
 
-	public double getAdditionalFees() {
+	public double getAdditionalFees() 
+    {
 		return REGISTRATION_FEE + getTechFee() +
 			   getLibraryFee() + course1.getSpecialFee() +
 			   course1.getCollegeFee();
 	}
 
-	public double getLibraryFee() {
+	public double getLibraryFee() 
+    {
 		return LIBRARY_FEE * getTuition();
 	}
 
-	public double getTechFee() {
+	public double getTechFee() 
+    {
 		return TECHNOLOGY_FEE * getTuition();
 	}
 
-	public double getTuition() {
+	public double getTuition() 
+    {
 		return course1.getCreditHours() * TUITION_PER_HOUR;
 	}
 
-    public void enterData() {
+    public void enterData() 
+    {
     	String temp1 = "";
     	
     	System.out.print("Please enter the student ID: ");
@@ -182,8 +204,7 @@ public class Students implements Serializable {
     	temp1 = readString();
     	while (!hasWords(temp1, 2))	{
     		System.out.println("Name input is invalid.");
-    		System.out.print("Please enter ONLY the student's first and" +
-    							" last names: ");
+    		System.out.print("Please enter ONLY the student's first and" + " last names: ");
     		temp1 = readString();
     	}
         setStudentName(temp1);
@@ -191,10 +212,8 @@ public class Students implements Serializable {
         System.out.print("Please enter date of registration (MM/DD/YYYY): ");
         temp1 = readString();
         while (!hasWords(temp1, 1)) {
-        	System.out.println("Date input is invalid.  Please follow the " +
-        						"format indicated.");
-        	System.out.print("Please enter date of registration (MM/DD/YYYY)" +
-        						": ");
+        	System.out.println("Date input is invalid.  Please follow the " + "format indicated.");
+        	System.out.print("Please enter date of registration (MM/DD/YYYY)" + ": ");
         	temp1 = readString();
         }
         setRegistrationDate(new Date(temp1));
@@ -202,8 +221,7 @@ public class Students implements Serializable {
         System.out.print("Please enter the student's phone number: ");
         temp1 = readString();
         while (!hasWords(temp1, 1)) {
-        	System.out.println("Number is invalid.  Please do not include " +
-        						"spaces in the input.");
+        	System.out.println("Number is invalid.  Please do not include " + "spaces in the input.");
         	System.out.print("Please enter the student's phone number: ");
         	temp1 = readString();
         }
@@ -212,8 +230,7 @@ public class Students implements Serializable {
         System.out.print("Please enter the student's current city: ");
         temp1 = readString();
         while (!hasWords(temp1, 1)) {
-        	System.out.println("Input is invalid.  Please type the city's " +
-        						"name as one word.");
+        	System.out.println("Input is invalid.  Please type the city's " + "name as one word.");
         	temp1 = readString();
         }
         setCurrentCity(temp1);
@@ -221,8 +238,7 @@ public class Students implements Serializable {
         System.out.print("Please enter the student's current state: ");
         temp1 = readString();
         while (!hasWords(temp1, 1)) {
-        	System.out.println("Input is invalid.  Please ensure that there" +
-        						" are no spaces.");
+        	System.out.println("Input is invalid.  Please ensure that there" + " are no spaces.");
         	temp1 = readString();
         }
         setCurrentState(temp1);
@@ -230,24 +246,26 @@ public class Students implements Serializable {
         System.out.print("Please enter the student's zip code: ");
         temp1 = readString();
         while (!hasWords(temp1, 1)) {
-        	System.out.println("Input is invalid.  Please ensure that " +
-        						"there are no spaces.");
+        	System.out.println("Input is invalid.  Please ensure that " + "there are no spaces.");
         	temp1 = readString();
         }
         setCurrentZipCode(temp1);
     }
 
-    private boolean hasWords(String string, int words) {
+    private boolean hasWords(String string, int words) 
+    {
     	if (words != 0 && string.equals(""))
     		return false;
     	return (string.split(" ").length == words);
     }
 
-    public boolean exists() {
+    public boolean exists() 
+    {
     	return (this.getStudentID() != "");
     }
 
-    private String readString() {
+    private String readString() 
+    {
         String userInput = "";
         Scanner scanner = new Scanner(System.in);
         userInput = scanner.nextLine();

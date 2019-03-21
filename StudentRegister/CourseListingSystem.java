@@ -33,56 +33,51 @@ public class CourseListingSystem  {
 						numberOfMatches++;
 						foundCourse = courseArray[i];
 						if (numberOfMatches < MAX_RESULTS_DISPLAYED)
-							results = results.concat(
-								courseArray[i].getCourseName() + ", " +
-								courseArray[i].getCourseNumber() + " taught by "
-								+ courseArray[i].getInstructorName() + "\n");
+								results = results.concat(
+									courseArray[i].getCourseName() + ", " +
+									courseArray[i].getCourseNumber() + " taught by "
+									+ courseArray[i].getInstructorName() + "\n"
+								);
 						else if (numberOfMatches == MAX_RESULTS_DISPLAYED)
 							results = results.concat("\nThe system found too many results to fully display.\n");
 					}
 				}
 
-				if (numberOfMatches > 1)
-				{
+				if (numberOfMatches > 1) {
 					inputString = (JOptionPane.showInputDialog(null,
 							"The system found " + numberOfMatches + " results that matched \""
 							+ inputString + "\".\n\n"
 							+ results
 							+ "\nPlease enter at least one more character from the course name,"
 							+ " course number, or instructor name to narrow your results:", inputString));
-				}// end if
-				else if (numberOfMatches < 1)
-				{
+				}
+				else if (numberOfMatches < 1) {
 					inputString = JOptionPane.showInputDialog(null,
 							"The system could not find any matches for \""
 							+ inputString + "\".\n\nPlease enter a new statement:", inputString);
-				}// end if
-			}while (numberOfMatches != 1);
+				}
+			} while (numberOfMatches != 1);
 
 		} catch (NullPointerException e){
 			return null;
 		}
-		
-		return foundCourse;
-		
+		return foundCourse;	
     }
     
 	public boolean matchesInput(Courses courseValue, String inputString){
-        
-	    	boolean matches = false;
+	    boolean matches = false;
 		
-			inputString = inputString.toLowerCase();
+		inputString = inputString.toLowerCase();
 		
-			if (courseValue.getCourseName().toLowerCase().contains(inputString)
-					|| courseValue.getCourseNumber().toLowerCase().contains(inputString)
-					|| courseValue.getInstructorName().toLowerCase().contains(inputString))
-				matches = true;
-
-			return matches;
-
+		if (courseValue.getCourseName().toLowerCase().contains(inputString) || 
+			courseValue.getCourseNumber().toLowerCase().contains(inputString) || 
+			courseValue.getInstructorName().toLowerCase().contains(inputString))
+			matches = true;
+		
+		return matches;
 	}
 
-	public void loadData()  {
+	public void loadData() {
 		courseArray[0].setCourseName("Design Studio I");
 		courseArray[0].setCourseNumber("301");
 		courseArray[0].setCreditHours(3);
@@ -202,7 +197,5 @@ public class CourseListingSystem  {
 		courseArray[11].setScheduledDays("M");
 		courseArray[11].setScheduledRoom("Avery 21");
 		courseArray[11].setInstructorName("Negede Yossef");
-		
 	}
-	
 }

@@ -95,28 +95,23 @@ public class RegistrationSystem implements ActionListener, WindowListener
 	private boolean fileIsReadable(File f)
 	{
 		try {
-			ObjectInputStream input =
-				new ObjectInputStream(new FileInputStream(f));
+			ObjectInputStream input = new ObjectInputStream(new FileInputStream(f));
 			try {
 				Students test = (Students) input.readObject();
 				if (!test.exists())
 					return false;
 			} catch (ClassNotFoundException e) {
-				JOptionPane.showMessageDialog(null,
-						"This file may not be in the " +
-						"format used by this program");
+				JOptionPane.showMessageDialog(null, "This file may not be in the " + "format used by this program");
 				return false;
 			} catch (EOFException e){
-				JOptionPane.showMessageDialog(null,
-						"This file is blank.");
+				JOptionPane.showMessageDialog(null, "This file is blank.");
 				return false;
 			} finally {
 				input.close();
 			}
 		} catch (IOException e) {
 			if (!f.toString().equals(""))
-				JOptionPane.showMessageDialog(null,
-					"This file could not be accessed.");
+				JOptionPane.showMessageDialog(null, "This file could not be accessed.");
 			return false;
 		}
 		return true;
@@ -142,8 +137,7 @@ public class RegistrationSystem implements ActionListener, WindowListener
 	{
 		int studentsInFile = 0;
 		boolean done;
-		do
-		{
+		do{
 			done = true;
 			String temp = JOptionPane.showInputDialog(
 				"How many student records are in this file?");
@@ -151,8 +145,7 @@ public class RegistrationSystem implements ActionListener, WindowListener
 				return 0;
 			try {
 				studentsInFile = Integer.parseInt(temp);
-				if (studentsInFile < 1)
-				{
+				if (studentsInFile < 1){
 					String message = "A positive, non-zero integer is required.";
 					JOptionPane.showMessageDialog(null, message);
 					done = false;
@@ -171,8 +164,7 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		ObjectInputStream input =
 			new ObjectInputStream(new FileInputStream(currentFile));
 		int n = countStudentsInFile();
-		if (n > 0)
-		{
+		if (n > 0) {
 			students = new Students[n + 20];
 			
 			int i = 0;
@@ -194,27 +186,23 @@ public class RegistrationSystem implements ActionListener, WindowListener
 				input.close();
 			} 
 		}
-	} // end of readFile
+	}
 
-	/**
-	 * Updates the GUI with all information it needs to display regarding
-	 * individual student accounts.
-	 */
 	private void updateGUI()
 	{
 		String[][] textDump = new String[getNumberOfStudents()][4];
 		DecimalFormat money = new DecimalFormat("$0.00");
-		for (int i = 0; i < getNumberOfStudents(); i++)
-		{
+
+		for (int i = 0; i < getNumberOfStudents(); i++) {
 			textDump[i][0] = students[i].getStudentName();
 			textDump[i][1] = students[i].getStudentID();
 			textDump[i][2] = students[i].getCourse().getCourseName();
 			textDump[i][3] = "" + money.format(getTotalFee(i));
 		} 
+
 		userInterface.displayText(textDump);
 		
-		if (getNumberOfStudents() == 0)
-		{
+		if (getNumberOfStudents() == 0){
 			userInterface.changeMode(GUI.NO_STUDENT_DATA_MODE);
 			setCurrentFile(null);
 		}
@@ -222,54 +210,37 @@ public class RegistrationSystem implements ActionListener, WindowListener
 			userInterface.changeMode(GUI.ARRAY_SORTED_MODE);
 		else
 			userInterface.changeMode(GUI.ARRAY_UNSORTED_MODE);
-	} // end of displayStudents
+	} 
 
-	/**
-	 * Asks the user if they want to save the current file.
-	 * @return An integer value from JOptionPane's response constants.
-	 */
 	private int wantToSave()
 	{
 		if (userInterface.getMode() == GUI.NO_STUDENT_DATA_MODE)
 			return JOptionPane.NO_OPTION;
-		else
-		{
-			String msg = "This action will write over all data in the system. " +
-				"Would you like to save before proceeding?";
+		else {
+			String msg = "This action will write over all data in the system. " + "Would you like to save before proceeding?";
 			int answer = JOptionPane.showConfirmDialog(null, msg);
 			if (answer == JOptionPane.YES_OPTION)
 				saveFile();
 			return answer;
-		}-else block
-	} // end of wantToSave
+		}
+	} 
 
-	// PRIMARY METHODS----------------------------------------------------------
-	/**
-	 * Creates a new empty file and sets it as the currently open file.
-	 */
 	private void newFile()
 	{
-		if (wantToSave() != JOptionPane.CANCEL_OPTION)
-		{
+		if (wantToSave() != JOptionPane.CANCEL_OPTION){
 			students = new Students[30];
 			for (int i = 0; i < students.length; i++)
 				students[i] = new Students();
 			setCurrentFile(null);
 			beginAddStudent();
 		}
-	} // end of newFile
-	
-	/**
-	 * Loads the passed file into the registration system.
-	 * @param f An input file to be loaded into the system.
-	 */
+	} 
+
 	private void openFile()
 	{
-		if (wantToSave() != JOptionPane.CANCEL_OPTION)
-		{
+		if (wantToSave() != JOptionPane.CANCEL_OPTION){
 			File f = userInterface.selectOpenFile();
-			if (fileIsReadable(f))
-			{
+			if (fileIsReadable(f)){
 				setCurrentFile(f);
 				
 				try {
@@ -281,15 +252,11 @@ public class RegistrationSystem implements ActionListener, WindowListener
 				updateGUI();
 			}
 		}
-	} // end of openFile
-	
-	/**
-	 * Saves all current data into the currently selected file.
-	 */
+	} 
+
 	private void saveFile()
 	{
-		if (currentFile != null && currentFile.exists())
-		{
+		if (currentFile != null && currentFile.exists()){
 			try {
 				ObjectOutputStream output =
 					new ObjectOutputStream(new FileOutputStream(currentFile));
@@ -314,11 +281,9 @@ public class RegistrationSystem implements ActionListener, WindowListener
 	private void saveAs()
 	{
 		File f = userInterface.selectSaveFile();
-		if (!f.toString().equals(""))
-		{
+		if (!f.toString().equals("")){
 			System.out.println(!f.exists());
-			if (!f.exists())
-			{
+			if (!f.exists()){
 				try {
 					f.createNewFile();
 				} catch (IOException e) {
@@ -333,14 +298,12 @@ public class RegistrationSystem implements ActionListener, WindowListener
 	{
 		int answer = JOptionPane.NO_OPTION;
 		
-		if (userInterface.getMode() != GUI.NO_STUDENT_DATA_MODE)
-		{
+		if (userInterface.getMode() != GUI.NO_STUDENT_DATA_MODE){
 			String msg = "Would you like to save before quitting?";
 			answer = JOptionPane.showConfirmDialog(null, msg);
 			if (answer == JOptionPane.YES_OPTION)
 				saveFile();
 		}
-		
 		if (answer != JOptionPane.CANCEL_OPTION)
 			System.exit(0);
 	}
@@ -351,27 +314,23 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		boolean isOpenSpace = ( students[students.length-1] == null
 									|| !students[students.length-1].exists() );
 		
-		if (isOpenSpace)
-		{
+		if (isOpenSpace){
 			userInterface.setEnabled(false);
 			studentAdder = new AddStudentInterface(this);
 		} else {
 			String message = "There is not enough space for another record.";
 			JOptionPane.showMessageDialog(null, message);
-		}-else
+		}
 	}
 	
 	private void finishAddStudent()
 	{	
-		if(studentAdder.inputIsValid())
-		{
+		if(studentAdder.inputIsValid()){
 			Students temp = studentAdder.retrieve();
 			int i = 0;
 			boolean done = false;
-			do
-			{
-				if (students[i] == null || !students[i].exists())
-				{
+			do{
+				if (students[i] == null || !students[i].exists()){
 					students[i] = temp;
 					done = true;
 				}
@@ -388,15 +347,13 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		int n = getNumberOfStudents();
 		boolean[] delete = new boolean[n];
 		String[][] displayedInfo = new String[2][n];
-		for (int i = 0; i < n; i++)
-		{
+		for (int i = 0; i < n; i++){
 			displayedInfo[0][i] = students[i].getStudentName();
 			displayedInfo[1][i] = students[i].getStudentID();
 		} 
 		
 		userInterface.setEnabled(false);
-		studentDeleter = new DeleteStudentInterface
-			(delete, displayedInfo, this);
+		studentDeleter = new DeleteStudentInterface(delete, displayedInfo, this);
 	} 
 	
 	private void finishDeleteStudents()
@@ -407,30 +364,24 @@ public class RegistrationSystem implements ActionListener, WindowListener
 			if (delete[i])
 				anyDeletions = true;
 		
-		if (anyDeletions)
-		{
+		if (anyDeletions){
 			int confirm = JOptionPane.showConfirmDialog(null,
 					"Are you sure you would like to delete these students?",
 					"Confirmation Needed", JOptionPane.YES_NO_OPTION);
-			if (confirm == JOptionPane.YES_OPTION)
-			{
+			if (confirm == JOptionPane.YES_OPTION){
 				int n = delete.length;
 				Students tempStudent;
 				boolean tempBool;
 				
-				for (int i = 0; i < n; i++)
-				{
-					if (delete[i])
-					{
+				for (int i = 0; i < n; i++){
+					if (delete[i]){
 						students[i] = new Students();
 						delete[i] = false;
-						for (int j = i; j < students.length - 1; j++)
-						{
+						for (int j = i; j < students.length - 1; j++){
 							tempStudent = students[j];
 							students[j] = students[j+1];
 							students[j+1] = tempStudent;
-							if (j+1 < n)
-							{
+							if (j+1 < n){
 								tempBool = delete[j];
 								delete[j] = delete[j+1];
 								delete[j+1] = tempBool;
@@ -452,8 +403,9 @@ public class RegistrationSystem implements ActionListener, WindowListener
 			getNumberOfStudents(),
 			getMeanAmountDue(),
 			getMedianAmountDue(),
-			getStandardDeviation() );
-            userInterface.changeComputeStats();
+			getStandardDeviation() 
+		);
+        userInterface.changeComputeStats();
 	}
 	
 
@@ -463,20 +415,18 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		Students temp;
 		int n = getNumberOfStudents();
 
-		if (!amountIsSorted())
-		{
+		if (!amountIsSorted()){
 			for (i = (n / 2) - 1; i >= 0; i--)
 				siftDown(i, n);
 			
-			for (i = n - 1; i >= 1; i--)
-			{
+			for (i = n - 1; i >= 1; i--){
 				temp = students[0];
 				students[0] = students[i];
 				students[i] = temp;
 				siftDown(0, i-1);
 			} 
 			updateGUI();
-                        userInterface.changeSortAmount();
+            userInterface.changeSortAmount();
 		}
 	}
 	
@@ -487,19 +437,17 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		Students temp;
 		int n = getNumberOfStudents();
 
-		for(j = 0; j < n; j++)
-		{
+		for(j = 0; j < n; j++){
 			for (i = (n / 2) - 1; i >= 0; i--)
 				siftNameDown(i, n);
-			for (i = n - 1; i >= 1; i--)
-			{
+			for (i = n - 1; i >= 1; i--){
 				temp = students[0];
 				students[0] = students[i];
 				students[i] = temp;
 				siftNameDown(0, i-1);
 			} 
-				updateGUI();
-	         userInterface.changeSortName();
+			updateGUI();
+	        userInterface.changeSortName();
 	    }
 	} 
 	
@@ -510,30 +458,27 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		Students temp;
 		int n = getNumberOfStudents();
 
-	for(j = 0; j < n; j++)
-	{
-		for (i = (n / 2) - 1; i >= 0; i--)
-			siftIDDown(i, n);
-		for (i = n - 1; i >= 1; i--)
-		{
-			temp = students[0];
-			students[0] = students[i];
-			students[i] = temp;
-			siftIDDown(0, i-1);
-		} 
-    		updateGUI();
- 			userInterface.changeSortID();
-	}
-}	
+		for(j = 0; j < n; j++){
+			for (i = (n / 2) - 1; i >= 0; i--)
+				siftIDDown(i, n);
+			for (i = n - 1; i >= 1; i--){
+				temp = students[0];
+				students[0] = students[i];
+				students[i] = temp;
+				siftIDDown(0, i-1);
+			} 
+	    	updateGUI();
+	 		userInterface.changeSortID();
+		}
+	}	
 
 	private void siftDown(int root, int bottom)
 	{
 		boolean done = false;
 		int maxChild;
 		Students temp;
-		while (root * 2 <= bottom && !done)
-		{	
-			
+
+		while (root * 2 <= bottom && !done) {	
 			boolean leftChildIsBottom = (root * 2 == bottom);
 			boolean leftChildIsLarger = ( getTotalFee(root * 2) > getTotalFee((root * 2) + 1) );
 			if (leftChildIsBottom || leftChildIsLarger)
@@ -554,9 +499,9 @@ public class RegistrationSystem implements ActionListener, WindowListener
 
 	private void siftIDDown(int root, int bottom) {
 
-      boolean done = false;
-		int maxChild;
-		Students temp;
+        boolean done = false;
+	    int maxChild;
+	    Students temp;
 		
 		while (root * 2 <= bottom && !done) {
 			boolean leftChildIsBottom = (root * 2 == bottom);
@@ -567,16 +512,15 @@ public class RegistrationSystem implements ActionListener, WindowListener
 			else
 				maxChild = (root * 2) + 1;
 			
-			if (getStudentID(root) < getStudentID(maxChild))
-			{
+			if (getStudentID(root) < getStudentID(maxChild)){
 				temp = students[root];
 				students[root] = students[maxChild];
 				students[maxChild] = temp;
 				root = maxChild;
 			} else {
 				done = true;
-				}-else
-			} 
+			}
+		} 
 	}
 
 	private void siftNameDown(int root, int bottom)
@@ -585,8 +529,7 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		int maxChild;
 		Students temp;
 		
-		for( temp = students[ root ]; (2 * root + 1) < bottom; root = maxChild ) 
-		{ 
+		for( temp = students[ root ]; (2 * root + 1) < bottom; root = maxChild ) { 
 			maxChild = 2 * root + 1; 
 			if( maxChild != bottom - 1 && students[ maxChild ].compareTo( students[ maxChild + 1 ] ) < 0 ) 
 				maxChild++; 
@@ -595,7 +538,7 @@ public class RegistrationSystem implements ActionListener, WindowListener
 			else 
 				break; 
 		} 
-			students[ root ] = temp; 
+		students[ root ] = temp; 
  	}  
 
 	
@@ -665,6 +608,4 @@ public class RegistrationSystem implements ActionListener, WindowListener
 
 	public void windowDeactivated(WindowEvent e) {
 	}
-	
-
 }

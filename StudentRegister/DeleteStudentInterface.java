@@ -12,8 +12,7 @@ public class DeleteStudentInterface extends JFrame
 	
 	private JCheckBox[] checkBoxes;
 	
-	public DeleteStudentInterface(boolean[] delete, String[][] displayInfo,
-			EventListener listener)
+	public DeleteStudentInterface(boolean[] delete, String[][] displayInfo, EventListener listener)
 	{
 		int n = delete.length;
 		assert n == displayInfo[0].length && n == displayInfo[1].length :
@@ -46,10 +45,8 @@ public class DeleteStudentInterface extends JFrame
 		confirmPanel.add(confirmBtn);
 		
 		deletePanel = new JPanel(new GridLayout(n, 3));
-		for(int i = 0; i < n; i++)
-		{
-			for(int j = 0; j < 2; j++)
-			{
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < 2; j++){
 				studentInfo[j][i] = new JLabel(displayInfo[j][i]);
 				deletePanel.add(studentInfo[j][i]);
 			}

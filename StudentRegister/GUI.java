@@ -71,12 +71,10 @@ public class GUI extends JFrame
 		menuBar = new JMenuBar();
 		menus = new JMenu[menuNames.length];
 		items = new JMenuItem[menus.length][];
-		for (int i = 0; i < menus.length; i++)
-		{
+		for (int i = 0; i < menus.length; i++){
 			menus[i] = new JMenu(menuNames[i]);
 			items[i] = new JMenuItem[itemNames[i].length];
-			for (int j = 0; j < items[i].length; j++)
-			{
+			for (int j = 0; j < items[i].length; j++){
 				items[i][j] = new JMenuItem(itemNames[i][j]);
 				menus[i].add(items[i][j]);
 				items[i][j].addActionListener((ActionListener) listener);
@@ -94,18 +92,16 @@ public class GUI extends JFrame
 		displayArea.setEditable(false);
 		displayArea.setFont(new Font("Courier", Font.PLAIN, 12));
 		displayArea.setMinimumSize(new Dimension(400,50));
-		scrollPane = new JScrollPane(displayArea,
-				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane = new JScrollPane(displayArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		displayPanel.add(scrollPane);
 		
 		statsPanel = new JPanel();
 		statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.LINE_AXIS));
-		String[] statsNames =
-			{"Number", "Mean", "Median", "Standard Dev."};
+		String[] statsNames ={
+			"Number", "Mean", "Median", "Standard Dev."
+		};
 		statsFields = new JTextField[statsNames.length];
-		for(int i = 0; i < statsNames.length; i++)
-		{
+		for(int i = 0; i < statsNames.length; i++) {
 			Box tempBox = new Box(BoxLayout.PAGE_AXIS);
 			statsFields[i] = new JTextField();
 			statsFields[i].setEditable(false);
@@ -133,8 +129,7 @@ public class GUI extends JFrame
 	{
 		setFocusHere();
 		this.mode = newMode;
-		if (mode == NO_STUDENT_DATA_MODE)
-		{
+		if (mode == NO_STUDENT_DATA_MODE) {
 			items[0][2].setEnabled(false);
 			items[0][3].setEnabled(false);
 			items[1][0].setEnabled(false);
@@ -164,14 +159,16 @@ public class GUI extends JFrame
             items[2][3].setEnabled(true);
 		}
 	}
-    public void changeSortName() {
+    public void changeSortName() 
+    {
         items[2][0].setEnabled(true);
         items[2][1].setEnabled(false);
         items[2][2].setEnabled(true);
         items[2][3].setEnabled(true);
     }
         
-    public void changeSortID() {
+    public void changeSortID() 
+    {
         items[2][0].setEnabled(true);
         items[2][1].setEnabled(true);
         items[2][2].setEnabled(false);
@@ -179,14 +176,16 @@ public class GUI extends JFrame
     }
                
                
-    public void changeSortAmount() {
+    public void changeSortAmount() 
+    {
         items[2][0].setEnabled(true);
         items[2][1].setEnabled(true);
         items[2][2].setEnabled(true);
         items[2][3].setEnabled(false);
     }
         
-    public void changeComputeStats() {
+    public void changeComputeStats() 
+    {
         items[2][0].setEnabled(false);
         items[2][1].setEnabled(true);
         items[2][2].setEnabled(true);
@@ -245,8 +244,7 @@ public class GUI extends JFrame
 		temp = ("-------------------|----------|------------------" +
 				  "-------------|-----------");
 		displayArea.append(temp + "\n");
-		for (int i = 0; i < s.length; i++)
-		{
+		for (int i = 0; i < s.length; i++){
 			temp = String.format("%18s |%9s |%30s |%11s",
 				s[i][0], s[i][1], s[i][2], s[i][3]);
 			displayArea.append(temp);

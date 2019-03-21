@@ -115,11 +115,9 @@ public class Courses implements Serializable{
 		setCourseName(readString());
 		System.out.print("Please enter the course credit hours: ");
 		setCreditHours(readInteger());
-		System.out.print("Please enter the college fee for each credit hour " +
-							"(in dollars): $");
+		System.out.print("Please enter the college fee for each credit hour " +	"(in dollars): $");
 		setCollegeFee(readInteger());
-		System.out.print("Please enter the course special fee (in dollars)" +
-							": $");
+		System.out.print("Please enter the course special fee (in dollars)" + ": $");
 		setSpecialFee(readInteger());	  
 	}
 
@@ -128,17 +126,15 @@ public class Courses implements Serializable{
 	}
 
 	public void partialDisplay(){
-		System.out.println("     " + getCourseName() + " (" + 
-							getCourseNumber() + "), taught by " + 
-							getInstructorName());
+		System.out.println("     " + getCourseName() + " (" + getCourseNumber() + "), taught by " + getInstructorName());
 	}
 
 	private int readInteger()  {	
 		int temp = 0;
 		Scanner scanner = new Scanner(System.in);
 		try {
-			temp = scanner.nextInt();  // read integer
-		}  catch (InputMismatchException ex) {
+			temp = scanner.nextInt();
+		} catch (InputMismatchException ex) {
 			System.out.println(ex);
 		}
 		return temp;
