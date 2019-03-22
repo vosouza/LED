@@ -14,7 +14,7 @@ public class AddStudentInterface extends JFrame
 	public static final String FIND_COURSE = "Find Course";
 	public static final String CLEAR_DATA = "Clear Student Data";
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	private JTextField[] courseFields;
 	private JTextField[] studentFields;
 	private Courses course;
@@ -172,30 +172,25 @@ public class AddStudentInterface extends JFrame
 			i++;
 		} while (i < studentFields.length && infoIsValid);
 	
-
-		if (!studentFields[1].getText().matches("[0-9]{8}")){
+		if (!studentFields[1].getText().matches("[R]{1}[A]{1}[0-9]{8}")){
 			infoIsValid = false;
-			errorMessage = errorMessage.concat("Student ID must consist only of 8 digits, in the format:" + " 12345678\n");
+			errorMessage = errorMessage.concat("Student RA must consist of 'RA' and 8 digits, in the format:" + " RA12345678\n");
 		}
-		
 		try {
 			Date date = sdf.parse(studentFields[2].getText());
-			if (date.before(sdf.parse("1/1/1869")))
-				errorMessage = errorMessage.concat("Year of registration must be later than 1869\n");
+			if (date.before(sdf.parse("1/1/1946")))
+				errorMessage = errorMessage.concat("Year of registration must be later than 1946\n");
 		} catch (ParseException e) {
 			infoIsValid = false;
-			errorMessage = errorMessage.concat("Registration date must be in the format MM/DD/YYYY\n");
+			errorMessage = errorMessage.concat("Registration date must be in the format DD/MM/YYYY\n");
 		}
-		
-		if (!studentFields[3].getText().matches("[0-9]{3}-[0-9]{3}-[0-9]{4}")){
+		if (!(studentFields[3].getText().matches("[0-9]{2}-[9]{1}[0-9]{4}-[0-9]{4}") || studentFields[3].getText().matches("[0-9]{2}-[0-9]{4}-[0-9]{4}"))){
 			infoIsValid = false;
-			errorMessage = errorMessage.concat("Phone Number must be in the format: 123-456-7890\n");
+			errorMessage = errorMessage.concat("Phone number must be in the format: 11-91234-7890 or 11-1234-5678\n");
 		}
-		
-		if (!(studentFields[6].getText().matches("[0-9]{5}") || studentFields[6].getText().matches("[0-9]{5}-[0-9]{4}"))){
+		if (!studentFields[6].getText().matches("[0-9]{5}-[0-9]{3}")){
 			infoIsValid = false;
-			errorMessage = errorMessage.concat("Zip Code must be in one of these formats: 12345 or" 
-												+ " 12345-6789\n");
+			errorMessage = errorMessage.concat("Zip Code must be this formats: 12345-678\n");
 		}
 		if (!(studentFields[7].getText().matches("[1-2]{1}") || studentFields[7].getText().matches("[1-2]{1}"))){
 			infoIsValid = false;
@@ -214,8 +209,7 @@ public class AddStudentInterface extends JFrame
 			errorMessage = errorMessage.concat("A course must be associated with the student\n");
 		}
 		if (!infoIsValid){
-			JOptionPane.showMessageDialog(null, "I'm sorry, but I was unable to save. Please correct the" 
-												+ " following errors:\n\n" + errorMessage);
+			JOptionPane.showMessageDialog(null, "I'm sorry, but I was unable to save. Please correct the" + " following errors:\n\n" + errorMessage);
 			return false;
 		} else
 			return true;
@@ -254,7 +248,7 @@ public class AddStudentInterface extends JFrame
 			studentFields[6].getText()
 		);
 		
-        temp.setCourse(course);
-        return temp;
+                temp.setCourse(course);
+                return temp;
 	}       
 }
