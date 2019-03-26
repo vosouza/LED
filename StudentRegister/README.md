@@ -3,6 +3,6 @@
 ### Título
 * Registro de alunos avançado
 ### Objetivo
-* Criar um registro completo de alunos
+* Criar um registro completo de alunos com informações dos estudantes, informação de aulas, etc.
 ### Data
-* 22/03/2019
+* 26/03/2019 = 1º Entrega
