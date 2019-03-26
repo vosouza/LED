@@ -3,10 +3,6 @@ import java.io.Serializable;
 
 public class Students implements Serializable {
 
-    public static final double TECHNOLOGY_FEE 	= 0.068; 
-    public static final double LIBRARY_FEE 		= 0.02;      
-    public static final double TUITION_PER_HOUR = 125.0;
-	public static final double REGISTRATION_FEE = 20.0;
     public static final int NAME = 0;
     public static final int ID = 1;
     private static final int LESS = -1;
@@ -165,28 +161,6 @@ public class Students implements Serializable {
         return compareTo(student, compareAttribute);
     }
 
-	public double getAdditionalFees() 
-    {
-		return REGISTRATION_FEE + getTechFee() +
-			   getLibraryFee() + course1.getSpecialFee() +
-			   course1.getCollegeFee();
-	}
-
-	public double getLibraryFee() 
-    {
-		return LIBRARY_FEE * getTuition();
-	}
-
-	public double getTechFee() 
-    {
-		return TECHNOLOGY_FEE * getTuition();
-	}
-
-	public double getTuition() 
-    {
-		return course1.getCreditHours() * TUITION_PER_HOUR;
-	}
-
     public void enterData() 
     {
     	String temp1 = "";
@@ -209,7 +183,7 @@ public class Students implements Serializable {
     	}
         setStudentName(temp1);
         
-        System.out.print("Please enter date of registration (MM/DD/YYYY): ");
+        System.out.print("Please enter date of registration (DD/MM/YYYY): ");
         temp1 = readString();
         while (!hasWords(temp1, 1)) {
         	System.out.println("Date input is invalid.  Please follow the " + "format indicated.");

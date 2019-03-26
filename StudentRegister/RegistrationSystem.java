@@ -33,55 +33,6 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		return validStudents;
 	}
 	
-	public double getMeanAmountDue()
-	{
-		int n = getNumberOfStudents();
-		if (n == 0)
-			return 0;
-		else {
-			double total = 0;
-			for (int i = 0; i < n; i++)
-			{
-				total += (getTotalFee(i));
-			}
-			return (total / n);
-		}
-	}
-	
-	public double getMedianAmountDue()
-	{
-		int n = getNumberOfStudents();
-		if (n == 0)
-			return 0;
-		else {
-			int i = n / 2;
-			if (n % 2 == 1)
-				i++;
-			return (getTotalFee(i-1));
-		}
-	}
-	
-	public double getStandardDeviation()
-	{
-		int n = getNumberOfStudents();
-		if (n == 0)
-			return 0;
-		else {
-			double numerator = 0;
-			double mean = getMeanAmountDue();
-			for (int i = 0; i < n; i++)
-				numerator += Math.pow((getTotalFee(i) - mean), 2);
-			double standardDeviation = Math.sqrt(numerator / n);
-			return standardDeviation;
-		}
-	}
-	
-	private double getTotalFee(int s)
-	{
-		return students[s].getAdditionalFees() + students[s].getTuition();
-	}
-	
-	
 	private double getStudentID(int s)
 	{
         return Double.parseDouble(students[s].getStudentID());
@@ -116,14 +67,6 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		}
 		return true;
 	}
-
-	private boolean amountIsSorted()
-	{
-		for (int i = 1; i < getNumberOfStudents(); i++)
-			if (getTotalFee(i) < getTotalFee(i-1))
-				return false;
-		return true;
-	}
 	
 	private void addCourseToStudent()
 	{
@@ -139,8 +82,7 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		boolean done;
 		do{
 			done = true;
-			String temp = JOptionPane.showInputDialog(
-				"How many student records are in this file?");
+			String temp = JOptionPane.showInputDialog("How many student records are in this file?");
 			if (temp == null || temp.equals(""))
 				return 0;
 			try {
@@ -197,7 +139,6 @@ public class RegistrationSystem implements ActionListener, WindowListener
 			textDump[i][0] = students[i].getStudentName();
 			textDump[i][1] = students[i].getStudentID();
 			textDump[i][2] = students[i].getCourse().getCourseName();
-			textDump[i][3] = "" + money.format(getTotalFee(i));
 		} 
 
 		userInterface.displayText(textDump);
@@ -205,10 +146,7 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		if (getNumberOfStudents() == 0){
 			userInterface.changeMode(GUI.NO_STUDENT_DATA_MODE);
 			setCurrentFile(null);
-		}
-		else if (amountIsSorted()) 
-			userInterface.changeMode(GUI.ARRAY_SORTED_MODE);
-		else
+		} else
 			userInterface.changeMode(GUI.ARRAY_UNSORTED_MODE);
 	} 
 
@@ -397,39 +335,6 @@ public class RegistrationSystem implements ActionListener, WindowListener
 		}
 	} 
 	
-	private void computeStats()
-	{
-		userInterface.displayStats(
-			getNumberOfStudents(),
-			getMeanAmountDue(),
-			getMedianAmountDue(),
-			getStandardDeviation() 
-		);
-        userInterface.changeComputeStats();
-	}
-	
-
-	private void sortAmount()
-	{
-		int i;
-		Students temp;
-		int n = getNumberOfStudents();
-
-		if (!amountIsSorted()){
-			for (i = (n / 2) - 1; i >= 0; i--)
-				siftDown(i, n);
-			
-			for (i = n - 1; i >= 1; i--){
-				temp = students[0];
-				students[0] = students[i];
-				students[i] = temp;
-				siftDown(0, i-1);
-			} 
-			updateGUI();
-            userInterface.changeSortAmount();
-		}
-	}
-	
 	private void sortName()
 	{	 
 		int i;
@@ -468,34 +373,8 @@ public class RegistrationSystem implements ActionListener, WindowListener
 				siftIDDown(0, i-1);
 			} 
 	    	updateGUI();
-	 		userInterface.changeSortID();
 		}
 	}	
-
-	private void siftDown(int root, int bottom)
-	{
-		boolean done = false;
-		int maxChild;
-		Students temp;
-
-		while (root * 2 <= bottom && !done) {	
-			boolean leftChildIsBottom = (root * 2 == bottom);
-			boolean leftChildIsLarger = ( getTotalFee(root * 2) > getTotalFee((root * 2) + 1) );
-			if (leftChildIsBottom || leftChildIsLarger)
-				maxChild = root * 2;
-			else
-				maxChild = (root * 2) + 1;
-			
-			if (getTotalFee(root) < getTotalFee(maxChild)){
-				temp = students[root];
-				students[root] = students[maxChild];
-				students[maxChild] = temp;
-				root = maxChild;
-			} else {
-				done = true;
-			}
-		} 
-	}
 
 	private void siftIDDown(int root, int bottom) {
 
@@ -564,14 +443,8 @@ public class RegistrationSystem implements ActionListener, WindowListener
 			beginAddStudent();
 		else if (action.equals(GUI.DELETE_STUDENT))
 			beginDeleteStudents();
-		else if (action.equals(GUI.COMPUTE_STATS))
-			computeStats();
 		else if (action.equals(GUI.SORT_NAME))
 			sortName();
-		else if (action.equals(GUI.SORT_ID))
-			sortID();
-		else if (action.equals(GUI.SORT_AMOUNT))
-			sortAmount();
 		else if (action.equals(AddStudentInterface.RETURN_DATA))
 			finishAddStudent();
 		else if (action.equals(AddStudentInterface.FIND_COURSE))

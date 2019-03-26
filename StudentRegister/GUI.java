@@ -17,10 +17,7 @@ public class GUI extends JFrame
 	public static final String QUIT = "Quit";
 	public static final String ADD_STUDENT = "Add Student";
 	public static final String DELETE_STUDENT = "Delete Student";
-	public static final String COMPUTE_STATS = "Compute Stats";
 	public static final String SORT_NAME = "Sort by Name";
-	public static final String SORT_ID = "Sort by ID";
-	public static final String SORT_AMOUNT = "Sort by Amount";
 	public static final int NO_STUDENT_DATA_MODE = 0;
 	public static final int ARRAY_UNSORTED_MODE = 1;
 	public static final int ARRAY_SORTED_MODE = 2;
@@ -53,11 +50,13 @@ public class GUI extends JFrame
 		String[][] itemNames = {
 			{"New", "Open", "Save", "Save As...", "Quit"},
 			{"Add Student", "Delete Student"},
-			{"Compute Stats", "Sort by Name", "Sort by ID", "Sort by Amout"} };
+			{"Sort by Name"} 
+		};
 		String[][] commands = {
 			{NEW, OPEN, SAVE, SAVE_AS, QUIT},
 			{ADD_STUDENT, DELETE_STUDENT},
-			{COMPUTE_STATS, SORT_NAME, SORT_ID, SORT_AMOUNT} };
+			{SORT_NAME} 
+		};
 		
 		assert menuNames.length == itemNames.length :
 			"menuNames and itemNames do not have matching lengths.";
@@ -135,9 +134,6 @@ public class GUI extends JFrame
 			items[1][0].setEnabled(false);
 			items[1][1].setEnabled(false);
 			items[2][0].setEnabled(false);
-			items[2][1].setEnabled(false);
-            items[2][2].setEnabled(false);
-            items[2][3].setEnabled(false);
             displayArea.setText("");
 		} else if (mode == ARRAY_UNSORTED_MODE) {
 			items[0][2].setEnabled(true);
@@ -163,31 +159,6 @@ public class GUI extends JFrame
     {
         items[2][0].setEnabled(true);
         items[2][1].setEnabled(false);
-        items[2][2].setEnabled(true);
-        items[2][3].setEnabled(true);
-    }
-        
-    public void changeSortID() 
-    {
-        items[2][0].setEnabled(true);
-        items[2][1].setEnabled(true);
-        items[2][2].setEnabled(false);
-        items[2][3].setEnabled(true);
-    }
-               
-               
-    public void changeSortAmount() 
-    {
-        items[2][0].setEnabled(true);
-        items[2][1].setEnabled(true);
-        items[2][2].setEnabled(true);
-        items[2][3].setEnabled(false);
-    }
-        
-    public void changeComputeStats() 
-    {
-        items[2][0].setEnabled(false);
-        items[2][1].setEnabled(true);
         items[2][2].setEnabled(true);
         items[2][3].setEnabled(true);
     }
@@ -226,27 +197,18 @@ public class GUI extends JFrame
 			statsFields[0].setText("");
 	} 
 
-	public void displayStats(int number, double mean, double median, double deviation)
-	{
-		statsFields[0].setText("" + number);
-		statsFields[1].setText("" + mean);
-		statsFields[2].setText("" + median);
-		statsFields[3].setText("" + deviation);
-	} 
-
 	public void displayText(String[][] s)
 	{
 		displayArea.setText("");
 		String temp;
-		temp = String.format("%18s |%9s |%30s |%11s",
-			"Name", "ID", "Asso. Course #", "Amount Due");
+		temp = String.format("%18s |%10s |%18s |",
+			"Name", "RA", "Course");
 		displayArea.append(temp + "\n");
-		temp = ("-------------------|----------|------------------" +
-				  "-------------|-----------");
+		temp = ("-------------------|-----------|----------------" +  "---|");
 		displayArea.append(temp + "\n");
 		for (int i = 0; i < s.length; i++){
-			temp = String.format("%18s |%9s |%30s |%11s",
-				s[i][0], s[i][1], s[i][2], s[i][3]);
+			temp = String.format("%18s |%8s |%18s |",
+				s[i][0], s[i][1], s[i][2]);
 			displayArea.append(temp);
 			if (i+1 != s.length)
 				displayArea.append("\n");

@@ -14,7 +14,7 @@ public class AddStudentInterface extends JFrame
 	public static final String FIND_COURSE = "Find Course";
 	public static final String CLEAR_DATA = "Clear Student Data";
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	private SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
 	private JTextField[] courseFields;
 	private JTextField[] studentFields;
 	private Courses course;
@@ -46,8 +46,7 @@ public class AddStudentInterface extends JFrame
 		
 		String[] studentLabelArray = {
 			"Student Name", "Student ID", "Date of Registration",
-			"Phone Number", "City", "State", "Zip Code", 
-			"Honors [Yes = 1] [No = 2]]", "RA [Yes = 1] [No = 2]", "TA [Yes = 1] [No = 2]"
+			"Phone Number", "City", "State", "Zip Code"
 		};
 		int stLabels = studentLabelArray.length;
 		studentFields = new JTextField[stLabels];
@@ -57,8 +56,8 @@ public class AddStudentInterface extends JFrame
 		
 		String[] courseLabelArray = {
 			"Course Number", "Course Name", "Course Credit Hours",
-			"College Fee", "Special Fee", "Scheduled Time",
-			"Scheduled Days", "Scheduled Room", "Instructor Name"
+			"Scheduled Time","Scheduled Days", "Scheduled Room", 
+			"Instructor Name"
 		};
 		int coLabels = courseLabelArray.length;
 		courseFields = new JTextField[coLabels];
@@ -192,24 +191,12 @@ public class AddStudentInterface extends JFrame
 			infoIsValid = false;
 			errorMessage = errorMessage.concat("Zip Code must be this formats: 12345-678\n");
 		}
-		if (!(studentFields[7].getText().matches("[1-2]{1}") || studentFields[7].getText().matches("[1-2]{1}"))){
-			infoIsValid = false;
-			errorMessage = errorMessage.concat("Please check if Honors is [Yes = 1] [No = 2]\n");
-		}
-		if (!(studentFields[8].getText().matches("[1-2]{1}") || studentFields[8].getText().matches("[1-2]{1}"))){
-			infoIsValid = false;
-			errorMessage = errorMessage.concat("Please check if RA is [Yes = 1] [No = 2]\n");
-		}
-		if (!(studentFields[9].getText().matches("[1-2]{1}") || studentFields[9].getText().matches("[1-2]{1}"))){
-			infoIsValid = false;
-			errorMessage = errorMessage.concat("Please check if TA is [Yes = 1] [No = 2]\n");
-		}
 		if (course == null){
 			infoIsValid = false;
 			errorMessage = errorMessage.concat("A course must be associated with the student\n");
 		}
 		if (!infoIsValid){
-			JOptionPane.showMessageDialog(null, "I'm sorry, but I was unable to save. Please correct the" + " following errors:\n\n" + errorMessage);
+			JOptionPane.showMessageDialog(null, "I'm sorry, but I was unable to save. Please correct the following errors:\n\n" + errorMessage);
 			return false;
 		} else
 			return true;
@@ -218,16 +205,13 @@ public class AddStudentInterface extends JFrame
 	public void setCourse(Courses c)
 	{
 		this.course = c;
-		DecimalFormat money = new DecimalFormat("$0.00");
 		courseFields[0].setText(c.getCourseNumber());
 		courseFields[1].setText(c.getCourseName());
 		courseFields[2].setText("" + c.getCreditHours());
-		courseFields[3].setText("" + money.format(c.getCollegeFee()));
-		courseFields[4].setText("" + money.format(c.getSpecialFee()));
-		courseFields[5].setText(c.getScheduledTime());
-		courseFields[6].setText(c.getScheduledDays());
-		courseFields[7].setText(c.getScheduledRoom());
-		courseFields[8].setText(c.getInstructorName());
+		courseFields[3].setText(c.getScheduledTime());
+		courseFields[4].setText(c.getScheduledDays());
+		courseFields[5].setText(c.getScheduledRoom());
+		courseFields[6].setText(c.getInstructorName());
 	}
 	
 	public Students retrieve()
@@ -248,7 +232,7 @@ public class AddStudentInterface extends JFrame
 			studentFields[6].getText()
 		);
 		
-                temp.setCourse(course);
-                return temp;
+        temp.setCourse(course);
+        return temp;
 	}       
 }

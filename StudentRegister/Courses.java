@@ -7,8 +7,6 @@ public class Courses implements Serializable{
 	private String 	courseNumber;
 	private String 	courseName;
 	private int 	creditHours;
-	private double 	hourlyCollegeFee;
-	private double 	specialFee;
 	private String	scheduledTime;
 	private String	scheduledDays;
 	private String	scheduledRoom;
@@ -18,16 +16,10 @@ public class Courses implements Serializable{
 		this.courseNumber 		= "";
 		this.courseName 		= "";
 		this.creditHours 		= 0;
-		this.hourlyCollegeFee 	= 0;
-		this.specialFee 		= 0;
 		this.scheduledTime 		= "";
 		this.scheduledDays 		= "";
 		this.scheduledRoom 		= "";
 		this.instructorName 	= "";
-	}
-	
-	public void setCollegeFee(double fee) {
-		this.hourlyCollegeFee = fee;
 	}
 
 	public String getCourseName() {
@@ -85,22 +77,12 @@ public class Courses implements Serializable{
 	public void setInstructorName(String instructorName) {
 		this.instructorName = instructorName;
 	}
-
-	public double getSpecialFee() {
-		return specialFee;
-	}
-	
-	public void setSpecialFee(double specialFee) {
-		this.specialFee = specialFee;
-	}
 	
 	public void display(){
 		System.out.println("Displaying Course Information: \n");
 		System.out.println("     Course Number: " + getCourseNumber());
 		System.out.println("     Course Name: " + getCourseName());
 		System.out.println("     Credit Hours: " + getCreditHours());
-		System.out.println("     College Fee: $" + getCollegeFee());
-		System.out.println("     Special Fee: $" + getSpecialFee());
 		System.out.println("     Scheduled Time: " + getScheduledTime());
 		System.out.println("     Scheduled Days: " + getScheduledDays());
 		System.out.println("     Scheduled Room: " + getScheduledRoom());
@@ -115,14 +97,6 @@ public class Courses implements Serializable{
 		setCourseName(readString());
 		System.out.print("Please enter the course credit hours: ");
 		setCreditHours(readInteger());
-		System.out.print("Please enter the college fee for each credit hour " +	"(in dollars): $");
-		setCollegeFee(readInteger());
-		System.out.print("Please enter the course special fee (in dollars)" + ": $");
-		setSpecialFee(readInteger());	  
-	}
-
-	public double getCollegeFee() {
-		return (this.hourlyCollegeFee * getCreditHours());
 	}
 
 	public void partialDisplay(){
