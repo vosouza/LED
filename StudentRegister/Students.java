@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.Serializable;
 
-public class Students implements Serializable {
+public class Students extends Person implements Serializable {
 
     public static final int NAME = 0;
     public static final int ID = 1;
@@ -9,12 +9,11 @@ public class Students implements Serializable {
     private static final int EQUAL = 0;
     private static final int MORE  = 1;
     private static int compareAttribute;
-    private String	studentName;
+    
     private String	studentID;
     private Date	registrationDate;
     private Courses	course1;
-    private String 	phoneNumber;
-	private String 	currentCity;
+
 	private String 	currentState;
 	private String 	currentZipCode;
         
@@ -35,6 +34,7 @@ public class Students implements Serializable {
 			String currentCity, String currentState, 
 			String currentZipCode) 
     {
+    	super(phoneNumber,studentName,currentCity);
         this.studentName 		= studentName;
 		this.studentID 			= studentID;
 		this.registrationDate 	= registrationDate;
